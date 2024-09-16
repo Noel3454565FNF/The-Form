@@ -657,6 +657,7 @@ GameObject:
   - component: {fileID: 1298965474}
   - component: {fileID: 1298965473}
   - component: {fileID: 1298965475}
+  - component: {fileID: 1298965476}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -703,7 +704,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1e25386942fa4941a07f503b3532187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TAC: {fileID: 1298965476}
   textMP: {fileID: 541260049}
+--- !u!114 &1298965476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298965472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e36344d257b2a142ac78dbb84097889, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentDialogue: 0
+  currentSection: A
+  sectionA:
+  - hi
+  - lets get started shall we
+  - what's your name?
+  sectionA1: []
+  sectionAP: []
+  sectionFAILSAFE: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
