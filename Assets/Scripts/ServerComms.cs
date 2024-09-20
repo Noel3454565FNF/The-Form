@@ -29,6 +29,11 @@ public class ServerComms : MonoBehaviour
     private HttpListener httpListener;
     private HttpRequestMessage httpRequest;
 
+    public string isAsking;
+
+    public string currentName;
+    public string currentTrueName;
+
     void Start()
     {
         StartHttpServer();
@@ -75,7 +80,7 @@ public class ServerComms : MonoBehaviour
             }
             if (path == "/input")
             {
-                JsonGetter(request);
+                whatwasasked(isAsking, DataReturnerString(request));
             }
             else
             {
@@ -83,6 +88,16 @@ public class ServerComms : MonoBehaviour
             }
 
 
+        }
+    }
+
+
+    public void whatwasasked(string str, string param)
+    {
+        if (str == "name")
+        {
+            currentName = param;
+            isAsking = null;
         }
     }
 
@@ -146,6 +161,19 @@ public class ServerComms : MonoBehaviour
 
     }
 
+
+    public string DataReturnerString(HttpListenerRequest request)
+    {
+        string jsonData;
+        using (var reader = new StreamReader(request.InputStream, request.ContentEncoding))
+        {
+            jsonData = reader.ReadToEnd();
+            Message message = JsonUtility.FromJson<Message>(jsonData);
+            return(message.message);
+        }
+    }
+
+
     public void requestmaker(string order)
     {
         string url = "http://localhost:3000/UnityOrder";
@@ -159,8 +187,9 @@ public class ServerComms : MonoBehaviour
         jsondata.order = order;
 
         // Convert JSON data to bytes
-        byte[] postData = Encoding.UTF8.GetBytes(jsondata.ToString());
-
+        byte[] postData = Encoding.UTF8.GetBytes(jsondata.order);
+        postData.AddRange(Encoding.UTF8.GetBytes(jsondata.fromUnity.ToString()));
+        print(postData);
         // Create a new UnityWebRequest, set method to POST
         UnityWebRequest request = new UnityWebRequest(url, "POST");
 

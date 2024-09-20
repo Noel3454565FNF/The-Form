@@ -397,7 +397,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541260049
 MonoBehaviour:
@@ -453,7 +453,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -677,6 +677,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1affae6ddc1a549a70382d01e9fd92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAsking: 
+  currentName: 
+  currentTrueName: 
 --- !u!4 &1298965474
 Transform:
   m_ObjectHideFlags: 0
@@ -706,6 +709,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TAC: {fileID: 1298965476}
   textMP: {fileID: 541260049}
+  serverComms: {fileID: 0}
+  specialyip: 0
 --- !u!114 &1298965476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -724,8 +729,49 @@ MonoBehaviour:
   - hi
   - lets get started shall we
   - what's your name?
+  - alright
+  - do you know why you are here?
+  - interesting
+  - do you know what is Appliance?
+  - do you know what they do?
+  - would you give everything for an idea?
+  - do you know who is watching?
+  - ...
+  sectionAEVENT:
+  - text
+  - text
+  - input
+  - text
+  - YON
+  - text
+  - YON
+  - YON
+  - YON
+  - YON
+  - text
+  sectionAWtime:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0.3
+  - 0.5
+  - 1
   sectionA1: []
-  sectionAP: []
+  sectionAP:
+  - joe who?
+  - yep you know what? kill yourself.
+  - your life is nothing.
+  - you serve 0 purpose.
+  - YOU SHOULD KILL YOURSELF NOW.
+  - AND GIVE SOMEBODY ELSE THAT PIECE OF OXYGEN YOU ARE WASTING.
+  - DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.
+  sectionAPEVENT: []
+  sectionAPWtime: []
   sectionFAILSAFE: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
