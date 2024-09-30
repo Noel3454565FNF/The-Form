@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
+using System.Net.Mail;
 
 public class Form : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class Form : MonoBehaviour
     public ServerComms serverComms;
     private string tempt;
     public bool specialyip = false;
+
+
+    public bool doesheknowwhoiswhatching = false;
+    public bool whatisappliance = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +64,10 @@ public class Form : MonoBehaviour
                 specialyip = true;
             }
         }
+        if (eventL == "text")
+        {
+            specialyip = false;
+        }
     
         foreach (var item in text)
         {
@@ -82,7 +92,20 @@ public class Form : MonoBehaviour
             //only use for special event/question lol
             serverComms.requestmaker(eventL);
 
-            serverComms.isAsking = "name";
+
+            if (TAC.currentSection == "A" && TAC.currentDialogue == 2)
+            {
+                serverComms.isAsking = "name";
+
+            }
+            if (TAC.currentSection == "A" && TAC.currentDialogue == 4)
+            {
+                serverComms.isAsking = "whoiswatchingYON";
+            }
+            if ((TAC.currentSection == "A" && TAC.currentDialogue == 6))
+            {
+                serverComms.isAsking = "whatisappliance";
+            }
         }
 
     }

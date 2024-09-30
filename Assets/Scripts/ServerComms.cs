@@ -10,6 +10,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Runtime.CompilerServices;
+using UnityEditor.ShaderGraph.Serialization;
 
 
 
@@ -21,7 +22,6 @@ public class Message
 
 public class JsonData
 {
-    public bool fromUnity = true;
     public string order;
 }
 public class ServerComms : MonoBehaviour
@@ -34,9 +34,12 @@ public class ServerComms : MonoBehaviour
     public string currentName;
     public string currentTrueName;
 
+    private Form form;
+
     void Start()
     {
         StartHttpServer();
+        form = gameObject.GetComponent<Form>();
     }
 
     async void StartHttpServer()
@@ -73,10 +76,12 @@ public class ServerComms : MonoBehaviour
             if (path == "/yes")
             {
                 JsonGetter(request);
+                whatwasasked(isAsking, DataReturnerString(request));
             }
             if (path == "/no")
             {
                 JsonGetter(request);
+                whatwasasked(isAsking, DataReturnerString(request));
             }
             if (path == "/input")
             {
@@ -98,6 +103,34 @@ public class ServerComms : MonoBehaviour
         {
             currentName = param;
             isAsking = null;
+            print("your name is " + currentName);
+            form.cleardial();
+            isAsking = null;
+        }
+        else if (str == "whoiswatchingYON")
+        {
+            if (param == "yes")
+            {
+                form.doesheknowwhoiswhatching = true;
+            }
+            else
+            {
+                form.doesheknowwhoiswhatching = false;
+            }
+            form.cleardial();
+        }
+        else if (str == "whatisappliance")
+        {
+            if (param == "yes")
+            {
+                form.whatisappliance = true;
+            }
+            else
+            {
+                form.whatisappliance = false;
+            }
+            form.cleardial();
+
         }
     }
 
@@ -174,50 +207,56 @@ public class ServerComms : MonoBehaviour
     }
 
 
-    public void requestmaker(string order)
-    {
-        string url = "http://localhost:3000/UnityOrder";
-        StartCoroutine(SendPostRequest(url, order));
-    }
-
-    IEnumerator SendPostRequest(string url, string order)
-    {
-        // Create JSON data for the request body (customize this data as needed)
-        JsonData jsondata = new JsonData();
-        jsondata.order = order;
-
-        // Convert JSON data to bytes
-        byte[] postData = Encoding.UTF8.GetBytes(jsondata.order);
-        postData.AddRange(Encoding.UTF8.GetBytes(jsondata.fromUnity.ToString()));
-        print(postData);
-        // Create a new UnityWebRequest, set method to POST
-        UnityWebRequest request = new UnityWebRequest(url, "POST");
-
-        // Set the upload handler with the JSON data
-        request.uploadHandler = new UploadHandlerRaw(postData);
-        request.downloadHandler = new DownloadHandlerBuffer();
-
-        // Set the request content-type to JSON
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        // Send the request and wait for the response
-        yield return request.SendWebRequest();
-
-        // Check for errors
-        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        [System.Serializable]
+        public class JsonData
         {
-            Debug.LogError("Error: " + request.error);
-            Debug.LogError(request.url);
-            Debug.LogError(request.responseCode);
+            public string order;
         }
-        else
-        {
-            // Handle the response
-            Debug.Log("Response: " + request.downloadHandler.text);
-        }
-    }
 
-    /*    IEnumerator FetchJsonData()
+        public void requestmaker(string order)
+        {
+            string url = "http://localhost:3000/UnityOrder";
+            StartCoroutine(SendPostRequest(url, order));
+        }
+
+        IEnumerator SendPostRequest(string url, string order)
+        {
+            // Create JSON data for the request body
+            JsonData jsonData = new JsonData();
+            jsonData.order = order;
+
+            // Serialize the JSON data to a string
+            string json = JsonUtility.ToJson(jsonData);
+
+            // Convert the JSON string to bytes
+            byte[] postData = Encoding.UTF8.GetBytes(json);
+
+            // Create a new UnityWebRequest, set method to POST
+            UnityWebRequest request = new UnityWebRequest(url);
+            request.method = UnityWebRequest.kHttpVerbPOST;
+
+            // Set the upload handler with the JSON data
+            request.uploadHandler = new UploadHandlerRaw(postData);
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            // Set the request content-type to JSON
+            request.SetRequestHeader("Content-Type", "application/json");
+
+            // Send the request and wait for the response
+            yield return request.SendWebRequest();
+
+            // Check for errors
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error: " + request.error);
+            }
+            else
+            {
+                // Handle the response
+                Debug.Log("Response: " + request.downloadHandler.text);
+            }
+        }
+        /*    IEnumerator FetchJsonData()
         {
             // Send a GET request to the URL
             UnityWebRequest request = UnityWebRequest.Post(url);
@@ -225,4 +264,4 @@ public class ServerComms : MonoBehaviour
 
         }
     */
-}
+    }
