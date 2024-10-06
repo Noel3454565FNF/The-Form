@@ -16,8 +16,11 @@ public class Form : MonoBehaviour
     public bool specialyip = false;
 
 
-    public bool doesheknowwhoiswhatching = false;
+    public bool doyouknowwhyareyouhere = false;
     public bool whatisappliance = false;
+    public bool whatappliancedo = false;
+    public bool wouldyougiveeverything = false;
+    public bool doyouknowwhoiswatching = false; //im always watching. no matter where you go. i will follow you. the curse is upon you.
 
     // Start is called before the first frame update
     void Start()
@@ -90,6 +93,7 @@ public class Form : MonoBehaviour
         {
             //waiting for manual cleardial :3
             //only use for special event/question lol
+            //please someone kill me.
             serverComms.requestmaker(eventL);
 
 
@@ -100,11 +104,23 @@ public class Form : MonoBehaviour
             }
             if (TAC.currentSection == "A" && TAC.currentDialogue == 4)
             {
-                serverComms.isAsking = "whoiswatchingYON";
+                serverComms.isAsking = "doyouknowwhyareyouhere";
             }
             if ((TAC.currentSection == "A" && TAC.currentDialogue == 6))
             {
                 serverComms.isAsking = "whatisappliance";
+            }
+            if (TAC.currentSection == "A" && TAC.currentDialogue == 7)
+            {
+                serverComms.isAsking = "whatappliancedo";
+            }
+            if (TAC.currentSection == "A" && TAC.currentDialogue == 8)
+            {
+                serverComms.isAsking = "wouldyougiveeverything";
+            }
+            if (TAC.currentSection == "A" && TAC.currentDialogue == 9)
+            {
+                serverComms.isAsking = "doyouknowwhoiswatching";
             }
         }
 
@@ -115,12 +131,29 @@ public class Form : MonoBehaviour
     {
         textMP.text = null;
         textMP.SetText(".");
-        if (TAC.currentDialogue == TAC.returnCurrentSection().Length || TAC.currentDialogue >= TAC.returnCurrentSection().Length)
+        print(TAC.returnCurrentSection().Length);
+        if (TAC.currentDialogue == TAC.returnCurrentSection().Length - 1 || TAC.currentDialogue >= TAC.returnCurrentSection().Length)
         {
+            print("next section");
             //going to next section
             if (TAC.currentSection == "A")
             {
-                TAC.currentSection = "B";
+                if (doyouknowwhyareyouhere && whatisappliance && whatappliancedo && doyouknowwhoiswatching == false)
+                {
+                    //he can't know...
+                    //...
+                    //right...?
+                }
+                if (doyouknowwhyareyouhere && whatisappliance && whatappliancedo && doyouknowwhoiswatching)
+                {
+                    //...
+                    //he have nothing to proof
+                    //its only bluff
+                }
+                if (doyouknowwhyareyouhere == false && whatisappliance == false && whatappliancedo == false)
+                {
+                    //lets proceed to the regular form then.
+                }
             }
         }
         else

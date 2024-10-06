@@ -711,6 +711,11 @@ MonoBehaviour:
   textMP: {fileID: 541260049}
   serverComms: {fileID: 0}
   specialyip: 0
+  doyouknowwhyareyouhere: 0
+  whatisappliance: 0
+  whatappliancedo: 0
+  wouldyougiveeverything: 0
+  doyouknowwhoiswatching: 0
 --- !u!114 &1298965476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -726,7 +731,7 @@ MonoBehaviour:
   currentDialogue: 0
   currentSection: A
   sectionA:
-  - hi
+  - ...
   - lets get started shall we
   - what's your name?
   - alright
@@ -750,17 +755,17 @@ MonoBehaviour:
   - YON
   - text
   sectionAWtime:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
+  - 0.1
   - 0.3
-  - 0.5
-  - 1
+  - 0.4
   sectionA1: []
   sectionAP:
   - joe who?
@@ -770,7 +775,14 @@ MonoBehaviour:
   - YOU SHOULD KILL YOURSELF NOW.
   - AND GIVE SOMEBODY ELSE THAT PIECE OF OXYGEN YOU ARE WASTING.
   - DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.DIE.
-  sectionAPEVENT: []
+  sectionAPEVENT:
+  - input
+  - text
+  - text
+  - text
+  - text
+  - text
+  - crash
   sectionAPWtime: []
   sectionFAILSAFE: []
 --- !u!1660057539 &9223372036854775807

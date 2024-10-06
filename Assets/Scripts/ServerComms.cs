@@ -35,11 +35,13 @@ public class ServerComms : MonoBehaviour
     public string currentTrueName;
 
     private Form form;
+    private TextAndContext textAndContext;
 
     void Start()
     {
         StartHttpServer();
         form = gameObject.GetComponent<Form>();
+        textAndContext = gameObject.GetComponent<TextAndContext>();
     }
 
     async void StartHttpServer()
@@ -75,12 +77,10 @@ public class ServerComms : MonoBehaviour
             }
             if (path == "/yes")
             {
-                JsonGetter(request);
                 whatwasasked(isAsking, DataReturnerString(request));
             }
             if (path == "/no")
             {
-                JsonGetter(request);
                 whatwasasked(isAsking, DataReturnerString(request));
             }
             if (path == "/input")
@@ -102,20 +102,21 @@ public class ServerComms : MonoBehaviour
         if (str == "name")
         {
             currentName = param;
+            textAndContext.sectionA[3] = "interesting, " + currentName;
             isAsking = null;
             print("your name is " + currentName);
             form.cleardial();
             isAsking = null;
         }
-        else if (str == "whoiswatchingYON")
+        else if (str == "doyouknowwhyareyouhere")
         {
             if (param == "yes")
             {
-                form.doesheknowwhoiswhatching = true;
+                form.doyouknowwhyareyouhere = true;
             }
             else
             {
-                form.doesheknowwhoiswhatching = false;
+                form.doyouknowwhyareyouhere = false;
             }
             form.cleardial();
         }
@@ -130,8 +131,44 @@ public class ServerComms : MonoBehaviour
                 form.whatisappliance = false;
             }
             form.cleardial();
-
         }
+        else if (str == "whatappliancedo")
+        {
+            if (param == "yes")
+            {
+                form.whatappliancedo = true;
+            }
+            else
+            {
+                form.whatappliancedo = false;
+            }
+            form.cleardial();
+        }
+        else if (str == "wouldyougiveeverything")
+        {
+            if (param == "yes")
+            {
+                form.wouldyougiveeverything = true;
+            }
+            else
+            {
+                form.wouldyougiveeverything = false;
+            }
+            form.cleardial();
+        }
+        else if (str == "doyouknowwhoiswatching")
+        {
+            if (param == "yes")
+            {
+                form.doyouknowwhoiswatching = true;
+            }
+            else
+            {
+                form.doyouknowwhoiswatching = false;
+            }
+            form.cleardial();
+        }
+        print(str);
     }
 
     // Handle the "/test" route
@@ -163,6 +200,7 @@ public class ServerComms : MonoBehaviour
     }
 
     // Handle not found route
+    //help me...
     void HandleNotFound(HttpListenerResponse response)
     {
         string responseString = "<html><body>404 - Not Found</body></html>";

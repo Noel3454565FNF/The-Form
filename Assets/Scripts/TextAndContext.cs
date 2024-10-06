@@ -51,7 +51,7 @@ public class TextAndContext : MonoBehaviour
 
     public string returnCurrentDialEvent()
     {
-        if (currentSection == "A")
+        if (currentSection == "A")//can someone hear me...?
         {
             return sectionAEVENT[currentDialogue];
         }
